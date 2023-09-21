@@ -1,0 +1,36 @@
+body {
+    font-family: "Times New Roman", serif;
+}
+#menu, #menu ul, #menu li {
+    padding: 0;
+    margin: 0;
+}
+#menu li {
+    list-style: none;
+    position: relative;
+    width: 100px;
+    height: 30px;
+    padding: 0 20px;
+    background-color: #b6b6b6;
+    line-height: 30px;
+    cursor: pointer;
+}
+#menu li a {
+    text-decoration: none;
+    color: aliceblue;
+}
+
+#menu li:hover {
+    background-color: #656565;
+}
+
+#menu ul ul {
+    position: absolute;
+    top: 0;
+    left: 140px;
+    visibility: hidden;
+}
+
+#menu ul li:hover ul {
+    visibility: visible;
+}
