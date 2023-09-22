@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width = device-width, initial-scale = 1.0">
     <title>Title</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css">
     <style>
@@ -14,7 +15,7 @@
             font-size: 20px;
         }
 
-        header {
+        #header {
             position: sticky;
             top: 0;
             margin: 0;
@@ -24,14 +25,14 @@
             color: white;
         }
 
-        head-link div {
+        #head-link {
             margin: 5px 0;
             padding: 0;
             width: 100%;
             background-color: blanchedalmond;
         }
 
-        head-link span a {
+        #head-link span a {
             margin: 5px;
 
             padding: 10px;
@@ -64,24 +65,24 @@
             color: #e8e7dc;
             text-align: center;
         }
-        .content-main {
+
+        .wrapper-content {
             display: flex;
         }
     </style>
 </head>
 <body>
-<header>
+
+<div id="header">
     <i class="fa-solid fa-ghost" style="color: #f9fafb;"></i> Cartoon Network
-</header>
-<head-link>
-    <div>
-        <span><a href="https://www.youtube.com/@disneyanimation"> Cartoon |</a></span>
-        <span><a href="https://www.youtube.com/@CartoonLA"> Favourite Cartoon |</a></span>
-        <span><a href="https://www.youtube.com/@CartoonLA"> Cartoon Characters |</a></span>
-        <span><a href="https://www.youtube.com/@CartoonLA"> Suggestions</a></span>
-    </div>
-</head-link>
-<div class="container content-main">
+</div>
+<div id="head-link">
+    <span><a href="https://www.youtube.com/@disneyanimation"> Cartoon |</a></span>
+    <span><a href="https://www.youtube.com/@CartoonLA"> Favourite Cartoon |</a></span>
+    <span><a href="https://www.youtube.com/@CartoonLA"> Cartoon Characters |</a></span>
+    <span><a href="https://www.youtube.com/@CartoonLA"> Suggestions</a></span>
+</div>
+<div class="wrapper-content">
     <div class="left-content">
         <iframe width="350" height="180" src="https://www.youtube.com/embed/humed6JJN34?si=jHxpBoeHUK3UAcBN"
                 title="YouTube video player" frameborder="0"
@@ -100,17 +101,17 @@
         <p>Muchas opciones | El Mundo de Craig | Cartoon Network</p>
     </div>
     <div class="right-content">
-        <div class="video-container">
             <iframe width="100%" height="500" src="https://www.youtube.com/embed/UBgFBRDJ4ds?si=YsHpnW0_-7bilDBn"
                     title="YouTube video player" frameborder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                     allowfullscreen></iframe>
             </iframe>
             <p>Craig contra Turner | El Mundo de Craig | Cartoon Network</p>
-            <p>Bienvenido al canal oficial de Cartoon Network LA en Youtube. Aquí encontraras videos de los mejores momentos
-                de tus shows favoritos ademas de contenido original solo para internet. No olvides suscribirte y prepárate
+            <p>Bienvenido al canal oficial de Cartoon Network LA en Youtube. Aquí encontraras videos de los mejores
+                momentos
+                de tus shows favoritos ademas de contenido original solo para internet. No olvides suscribirte y
+                prepárate
                 para un contenido ilimitado lleno de diversión.</p>
-        </div>
     </div>
 </div>
 <footer>
