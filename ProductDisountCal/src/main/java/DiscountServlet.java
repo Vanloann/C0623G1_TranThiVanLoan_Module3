@@ -15,12 +15,17 @@ public class DiscountServlet extends HttpServlet {
         String description = request.getParameter("description");
         double price = Double.parseDouble(request.getParameter("price"));
         double discount = Double.parseDouble(request.getParameter("discount"));
-        double dis_amount = price * discount * 0.01;
-        double dis_price = price - dis_amount;
+        double discountAmount = price * discount * 0.01;
+        double discountPrice = price - discountAmount;
+
+        request.setAttribute("description", description);
+        request.setAttribute("price", price);
+        request.setAttribute("discount", discount);
+        request.setAttribute("discountAmount", discountAmount);
+        request.setAttribute("discountPrice", discountPrice);
+
 
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/discount.jsp");
-        request.setAttribute("dis_amount", dis_amount);
-        request.setAttribute("dis_price", dis_price);
         requestDispatcher.forward(request, response);
     }
 }

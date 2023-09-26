@@ -2,12 +2,14 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>JSP - Hello World</title>
+    <title>Discount</title>
 </head>
 <body>
-<h1><%= "Hello World!" %>
-</h1>
-<br/>
-<a href="hello-servlet">Hello Servlet</a>
+<form action="discount-servlet" method="post">
+    <input type="text" name="description" placeholder="Enter product description: "/> <br>
+    <input type="number" name="price" placeholder="Enter product price: "/> <br>
+    <input type="number" name="discount" placeholder="Enter discount percent: "/> <br>
+    <input type = "submit" id = "submit" value = "Calculate Discount"/> <br>
+</form>
 </body>
 </html>

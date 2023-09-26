@@ -11,17 +11,10 @@
     <title>Title</title>
 </head>
 <body>
-<form action="discount-servlet" method="post">
-    <input type="text" name="description" placeholder="Enter product description: "/>
-    <input type="text" name="price" placeholder="Enter product price: "/>
-    <input type="text" name="discount" placeholder="Enter discount %: "/>
-    <input type = "submit" id = "submit" value = "Calculate Discount"/>
-</form>
-
-Product Description: ${description} <br>
-List Price:  ${price} <br>
-Discount Percent:   ${discount} <br>
-Discount Amount: ${dis_amount} <br>
-Discount Price: ${dis_price}
+<p>Product Description: ${description}</p>
+<p>List Price:  ${price} </p>
+<p>Discount Percent: ${discount} </p>
+<p>Discount Amount: ${discountAmount}</p>
+<p>Discount Price: ${discountPrice}</p>
 </body>
 </html>
