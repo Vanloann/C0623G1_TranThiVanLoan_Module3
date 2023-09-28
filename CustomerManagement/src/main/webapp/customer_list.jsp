@@ -13,27 +13,32 @@
 </head>
 <body>
 <h1>List of Customer</h1>
-<table border="1px">
+<p><a href="customer-servlet?action=create">Add Customer</a></p>
+<table border="1px" style="border-collapse: collapse; width: 500px; text-align: center">
     <thead>
     <tr>
         <th>No.</th>
         <th>Name</th>
         <th>Email</th>
         <th>Address</th>
+        <th>Edit</th>
+        <th>Delete</th>
     </tr>
     </thead>
     <tbody>
         <c:forEach items="${customerList}" var="customer" varStatus="loop">
             <tr>
                 <td>${loop.count}</td>
-                <td>${customer.name}</td>
+                <td><a href="customer-servlet?action=view&id=${customer.id}">${customer.name}</a></td>
                 <td>${customer.email}</td>
                 <td>${customer.address}</td>
+                <td><a href="customer-servlet?action=edit&id=${customer.id}">Edit</a></td>
+                <td><a href="customer-servlet?action=remove&id=${customer.id}">Delete</a></td>
             </tr>
         </c:forEach>
     </tbody>
 </table>
 <br>
-<a href="/customer-servlet?action=create">Add Customer</a>
+
 </body>
 </html>

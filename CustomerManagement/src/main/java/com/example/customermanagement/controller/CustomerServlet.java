@@ -1,27 +1,17 @@
 package com.example.customermanagement.controller;
 
 import com.example.customermanagement.model.Customer;
+import com.example.customermanagement.service.ICustomerService;
+import com.example.customermanagement.service.impl.CustomerServiceImpl;
 
 import javax.servlet.*;
 import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 @WebServlet(name = "customerServlet", value = "/customer-servlet")
 public class CustomerServlet extends HttpServlet {
-    private static List<Customer> customerList;
-
-    static {
-        customerList = new ArrayList<>();
-        customerList.add(new Customer(1, "John", "john@codegym.vn", "Hanoi"));
-        customerList.add(new Customer(2, "Bill", "bill@codegym.vn", "Danang"));
-        customerList.add(new Customer(3, "Alex", "alex@codegym.vn", "Saigon"));
-        customerList.add(new Customer(4, "Adam", "adam@codegym.vn", "Beijin"));
-        customerList.add(new Customer(5, "Sophia", "sophia@codegym.vn", "Miami"));
-        customerList.add(new Customer(6, "Rose", "rose@codegym.vn", "Newyork"));
-    }
+   private ICustomerService customerService = new CustomerServiceImpl();
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
@@ -32,26 +22,61 @@ public class CustomerServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                createCustomer(request, response);
+                createForm(request, response);
+                break;
+            case "edit":
+                editForm(request, response);
+                break;
+            case "remove":
+                removeForm(request, response);
+            case "view":
+                viewCustomer(request, response);
             default:
                 displayCustomerList(request, response);
+                break;
         }
     }
 
     private void displayCustomerList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("customerList", customerList);
+        request.setAttribute("customerList", customerService.displayCustomer());
         RequestDispatcher display = request.getRequestDispatcher("/customer_list.jsp");
         display.forward(request, response);
     }
 
-    private void createCustomer(HttpServletRequest request, HttpServletResponse response)
+    private void createForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("customerList", customerList);
+        request.setAttribute("customerList", customerService.displayCustomer());
         RequestDispatcher create = request.getRequestDispatcher("/create_customer.jsp");
         create.forward(request, response);
     }
 
+    private void editForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = customerService.findByID(id);
+        request.setAttribute("customer", customer);
+        RequestDispatcher edit = request.getRequestDispatcher("/edit_customer.jsp");
+        edit.forward(request, response);
+    }
+
+    private void removeForm(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = customerService.findByID(id);
+        request.setAttribute("customer", customer);
+        RequestDispatcher remove = request.getRequestDispatcher("/remove_customer.jsp");
+        remove.forward(request, response);
+    }
+
+    private void viewCustomer(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        Customer customer = customerService.findByID(id);
+        request.setAttribute("customer", customer);
+        RequestDispatcher view = request.getRequestDispatcher("/view.jsp");
+        view.forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -63,6 +88,15 @@ public class CustomerServlet extends HttpServlet {
         switch (action) {
             case "create":
                 create(request, response);
+                break;
+            case "edit":
+                edit(request, response);
+                break;
+            case "remove":
+                remove(request, response);
+                break;
+            default:
+                break;
         }
 
     }
@@ -74,7 +108,29 @@ public class CustomerServlet extends HttpServlet {
         String email = request.getParameter("email");
         String address = request.getParameter("address");
         Customer customer = new Customer(id, name, email, address);
-        customerList.add(customer);
+        customerService.createCustomer(customer);
+        response.sendRedirect("/customer-servlet");
+    }
+
+    private void edit(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String address = request.getParameter("address");
+        Customer customer = customerService.findByID(id);
+        customer.setName(name);
+        customer.setEmail(email);
+        customer.setAddress(address);
+        customerService.editCustomer(id, customer);
+        response.sendRedirect("/customer-servlet");
+    }
+
+    private void remove(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        int id = Integer.parseInt(request.getParameter("id"));
+        customerService.findByID(id);
+        customerService.removeCustomer(id);
         response.sendRedirect("/customer-servlet");
     }
 }

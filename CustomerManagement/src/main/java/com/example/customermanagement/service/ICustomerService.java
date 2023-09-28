@@ -11,7 +11,9 @@ public interface ICustomerService {
 
     void removeCustomer (int id);
 
+    Customer findByID (int id);
+
     void editCustomer (int id, Customer customer);
 
-    List<Customer> searchCustomerByName (String name);
+//    List<Customer> searchCustomerByName (String name);
 }

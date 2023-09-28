@@ -14,5 +14,7 @@ public interface ICustomerRepo {
 
     void editCustomer (int id, Customer customer);
 
-    List<Customer> searchCustomerByName (String name);
+//    List<Customer> searchCustomerByName (String name);
+
+    Customer findByID (int id);
 }
