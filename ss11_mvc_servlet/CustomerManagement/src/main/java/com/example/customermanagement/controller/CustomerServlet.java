@@ -129,7 +129,6 @@ public class CustomerServlet extends HttpServlet {
     private void remove(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        customerService.findByID(id);
         customerService.removeCustomer(id);
         response.sendRedirect("/customer-servlet");
     }
