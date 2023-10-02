@@ -7,10 +7,36 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Create User</title>
+</head>
+<body>
+<h3>Insert User</h3>
+<form action="user-servlet?action=create" method="post">
+<table>
+    <tr>
+        <th>Name</th>
+        <td><input type="text" name="name"></td>
+    </tr>
+    <tr>
+        <th>Email</th>
+        <td><input type="text" name="email"></td>
+    </tr>
+    <tr>
+        <th>Country</th>
+        <td><input type="text" name="country"></td>
+    </tr>
+    <tr>
+        <th>Permission:</th>
+        <td>
+            <input type="checkbox" name="add" size="15"/> add |
+            <input type="checkbox" name="edit" size="15"/> edit |
+            <input type="checkbox" name="delete" size="15"/> delete |
+            <input type="checkbox" name="view" size="15"/> view
+        </td>
+    </tr>
+</table>
+    <button style="margin-top: 20px" type="submit">Insert</button>
+</form>
+</body>
 </html>

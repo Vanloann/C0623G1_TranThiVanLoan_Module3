@@ -7,10 +7,27 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
-  <head>
-    <title>$Title$</title>
-  </head>
-  <body>
-  $END$
-  </body>
+<head>
+    <title>Display User Information</title>
+</head>
+<body>
+<form action="customer-servlet?action=view" method="get">
+    <table border="1">
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Country</th>
+        </tr>
+        <tr>
+            <input type="hidden" name="id" value="${user.getId()}">
+        </tr>
+        <tr>
+            <td>${user.getName()}</td>
+            <td>${user.getEmail()}</td>
+            <td>${user.getCountry()}</td>
+        </tr>
+    </table>
+</form>
+<a href="user-servlet">Back to User List</a>
+</body>
 </html>

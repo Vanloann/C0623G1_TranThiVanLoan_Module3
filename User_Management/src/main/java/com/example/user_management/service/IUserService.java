@@ -1,11 +1,10 @@
-package com.example.user_management.repository;
+package com.example.user_management.service;
 
 import com.example.user_management.model.User;
 
-import javax.jws.soap.SOAPBinding;
 import java.util.List;
 
-public interface IUserRepo {
+public interface IUserService {
     List<User> displayUserList();
 
     void createUser (User user);
@@ -18,7 +17,6 @@ public interface IUserRepo {
 
     User findByCountry (String country);
 
-// stored procedure
     User getUserById (int id);
 
     void insertUserStore (User user);
@@ -32,4 +30,7 @@ public interface IUserRepo {
     void addUserTransaction(User user, List<Integer> permissions);
 
     void insertUpdateUseTransaction();
+
+
+
 }
