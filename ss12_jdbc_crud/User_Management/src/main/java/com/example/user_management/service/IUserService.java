@@ -17,5 +17,20 @@ public interface IUserService {
 
     User findByCountry (String country);
 
+    User getUserById (int id);
+
+    void insertUserStore (User user);
+
+    List<User> displayUserProcedure();
+
+    void editUserProcedure(int id, User user);
+
+    void deleteUserProcedure(int id);
+
+    void addUserTransaction(User user);
+
+    void insertUpdateUseTransaction();
+
+
 
 }

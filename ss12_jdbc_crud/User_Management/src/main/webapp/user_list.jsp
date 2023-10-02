@@ -14,6 +14,10 @@
 </head>
 <body>
 <h2>User List</h2>
+<form style="margin-top: 20px; margin-left: 20px" action="/user-servlet?action=search" method="post">
+  <input type="text" name="country" placeholder="Search by country">
+  <button type="submit">Search</button>
+</form>
 <p><a href="user-servlet?action=create">Insert User</a></p>
 <table border="1" style="border-collapse: collapse; text-align: center; width: 800px">
   <tr>
@@ -35,9 +39,8 @@
     </tr>
   </c:forEach>
 </table>
-<form action="/user-servlet?action=search" method="post">
-  <input type="text" name="country" placeholder="Search by country">
-  <button type="submit">Search</button>
-</form>
+
+
+
 </body>
 </html>

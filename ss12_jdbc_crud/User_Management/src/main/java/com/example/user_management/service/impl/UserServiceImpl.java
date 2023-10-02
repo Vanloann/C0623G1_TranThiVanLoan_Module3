@@ -22,7 +22,15 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void editUser(int id, User user) {
-        userRepo.editUser(id, user);
+        if (findById(id) == null) {
+            try {
+                throw new Exception("User is not found");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            userRepo.editUser(id, user);
+        }
     }
 
     @Override
@@ -32,11 +40,54 @@ public class UserServiceImpl implements IUserService {
 
     @Override
     public void deleteUser(int id) {
-        userRepo.deleteUser(id);
+        if (findById(id) == null) {
+            try {
+                throw new Exception("User is not found");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        } else {
+            userRepo.deleteUser(id);
+        }
     }
 
     @Override
     public User findByCountry(String country) {
         return userRepo.findByCountry(country);
+    }
+
+    @Override
+    public User getUserById(int id) {
+        return userRepo.getUserById(id);
+    }
+
+    @Override
+    public void insertUserStore(User user) {
+        userRepo.insertUserStore(user);
+    }
+
+    @Override
+    public List<User> displayUserProcedure() {
+        return userRepo.displayUserProcedure();
+    }
+
+    @Override
+    public void editUserProcedure(int id, User user) {
+        userRepo.editUserProcedure(id, user);
+    }
+
+    @Override
+    public void deleteUserProcedure(int id) {
+        userRepo.deleteUserProcedure(id);
+    }
+
+    @Override
+    public void addUserTransaction(User user) {
+
+    }
+
+    @Override
+    public void insertUpdateUseTransaction() {
+        userRepo.insertUpdateUseTransaction();
     }
 }

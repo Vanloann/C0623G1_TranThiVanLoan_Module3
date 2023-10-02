@@ -18,5 +18,18 @@ public interface IUserRepo {
 
     User findByCountry (String country);
 
+// stored procedure
+    User getUserById (int id);
 
+    void insertUserStore (User user);
+
+    List<User> displayUserProcedure();
+
+    void editUserProcedure(int id, User user);
+
+    void deleteUserProcedure(int id);
+
+    void addUserTransaction(User user);
+
+    void insertUpdateUseTransaction();
 }

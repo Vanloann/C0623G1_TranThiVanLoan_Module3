@@ -43,18 +43,24 @@ public class UserServlet extends HttpServlet {
         }
     }
 
-
     private void editForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        User user = userService.findById(id);
-        request.setAttribute("user", user);
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/edit_user.jsp");
+        RequestDispatcher requestDispatcher = null;
+//        User user = userService.findById(id);
+        User user = userService.getUserById(id);
+        if (user == null) {
+            requestDispatcher = request.getRequestDispatcher("/error.jsp");
+        } else {
+            request.setAttribute("user", user);
+            requestDispatcher = request.getRequestDispatcher("/edit_user.jsp");
+        }
         requestDispatcher.forward(request, response);
+
     }
+
     private void createForm(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setAttribute("userList", userService.displayUserList());
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/create_user.jsp");
         requestDispatcher.forward(request, response);
     }
@@ -71,7 +77,8 @@ public class UserServlet extends HttpServlet {
     private void displayUser(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        User user = userService.findById(id);
+//      User user = userService.findById(id);
+        User user = userService.getUserById(id);
         request.setAttribute("user", user);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/view.jsp");
         requestDispatcher.forward(request, response);
@@ -79,7 +86,8 @@ public class UserServlet extends HttpServlet {
 
     private void displayUserList(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        List<User> userList = userService.displayUserList();
+//      List<User> userList = userService.displayUserList();
+        List<User> userList = userService.displayUserProcedure();
         request.setAttribute("userList", userList);
         RequestDispatcher requestDispatcher = request.getRequestDispatcher("/user_list.jsp");
         requestDispatcher.forward(request, response);
@@ -88,9 +96,23 @@ public class UserServlet extends HttpServlet {
     private void delete(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         int id = Integer.parseInt(request.getParameter("id"));
-        userService.deleteUser(id);
-        response.sendRedirect("user-servlet");
+//        userService.deleteUser(id);
+        User user = userService.findById(id);
+        RequestDispatcher requestDispatcher = null;
+        if (user == null) {
+            requestDispatcher = request.getRequestDispatcher("/error.jsp");
+            requestDispatcher.forward(request, response);
+        } else {
+            userService.deleteUserProcedure(id);
+            response.sendRedirect("user-servlet");
+        }
     }
+
+    private void testTransaction(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        userService.insertUpdateUseTransaction();
+    }
+
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String action = request.getParameter("action");
@@ -99,7 +121,7 @@ public class UserServlet extends HttpServlet {
         }
         switch (action) {
             case "create":
-                create(request, response);
+                insertUser(request, response);
                 break;
             case "edit":
                 edit(request, response);
@@ -128,15 +150,25 @@ public class UserServlet extends HttpServlet {
         String name = request.getParameter("name");
         String email = request.getParameter("email");
         String country = request.getParameter("country");
-        User user = userService.findById(id);
+//        User user = userService.findById(id);
+        User user = userService.getUserById(id);
         user.setName(name);
         user.setEmail(email);
         user.setCountry(country);
-        userService.editUser(id, user);
+//        userService.editUser(id, user);
+        userService.editUserProcedure(id, user);
         response.sendRedirect("user-servlet");
     }
 
-
+    private void insertUser(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String email = request.getParameter("email");
+        String country = request.getParameter("country");
+        User user = new User(name, email, country);
+        userService.insertUserStore(user);
+        response.sendRedirect("user-servlet");
+    }
 
 
 }
